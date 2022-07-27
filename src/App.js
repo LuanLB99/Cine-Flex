@@ -5,6 +5,7 @@ import { useState } from "react";
 import Top from "./Top";
 import Film from "./Film";
 import Sessions from "./Sessions";
+import Seats from "./Seats";
 
 export default function App(){
   const [id, setId] = useState('')
@@ -15,8 +16,10 @@ export default function App(){
       <Routes>
         <Route path='/' element={<Film setId={setId}/>} />
         <Route path={`/sessoes/`+id}  element={<Sessions id={id}/>} />
+        <Route path='/assentos/' element={<Seats />} />
       </Routes>
       </BrowserRouter>
     </div>
     )
 }
+
