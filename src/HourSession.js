@@ -1,10 +1,13 @@
+import { Link } from "react-router-dom";
+
+
 export default function HourSession({name, idShowtime}){
     return(
        
-        <div className="sessao">
+        <Link to={`/assentos/${idShowtime}`}><div className="sessao">
             {name}
-            {idShowtime}
         </div>
+        </Link>
 
     )
 }

@@ -1,22 +1,75 @@
-export default function Seats(){
+import axios from "axios";
+import Seat from "./Seat";
+import { useState, useEffect } from "react";
+import { useParams, Navigate, Link, useNavigate } from "react-router-dom";
+import Finish from "./Finish";
+
+
+
+export default function Seats({setFinish, finish}){
+        
+        const {idSessao} = useParams({});
+        const [assentos,setAssentos] = useState([]);
+
+        const [footerhour,setFooterhour] = useState('');
+        const [footermovie, setFootermovie] = useState('');
+        const [footerday, setFooterday] = useState('');
+        const [nome, setNome] = useState('');
+        const [cpf, setCpf] = useState('');
+        const [arr, setArr] = useState([]);
+        const navigate = useNavigate();
+
+        useEffect(() => {
+            const promise = axios.get(`https://mock-api.driven.com.br/api/v7/cineflex/showtimes/${idSessao}/seats`);
+            promise.then(resposta => {
+                
+                setAssentos(resposta.data.seats);
+                setFooterhour(resposta.data);
+                setFootermovie(resposta.data.movie);
+                setFooterday(resposta.data.day);
+            })
+        }, []);
+
+
+        function reserve(e){
+            e.preventDefault();
+            const body = {
+                ids:arr,
+                name:nome,
+                cpf:cpf
+            }
+            setFinish(...finish, {
+                filme:footermovie.title,
+                dia: footerday.weekday,
+                data: footerday.date,
+                vagas:arr,
+                nome: nome,
+                cpf: cpf
+            })
+            const promise = axios.post('https://mock-api.driven.com.br/api/v7/cineflex/seats/book-many', body)
+            promise.then();
+        }
+
     return(
         <>
+
+        <form onSubmit={reserve} >
         <div className="header">
             <h1>Selecione o(s) assento(s)</h1>
         </div>
         <div className="seats">
-            <div className="seat"><h4>01</h4></div>
-            <div className="seat"><h4>01</h4></div>
-            <div className="seat"><h4>01</h4></div>
-            <div className="seat"><h4>01</h4></div>
-            <div className="seat"><h4>01</h4></div>
-            <div className="seat"><h4>01</h4></div>
-            <div className="seat"><h4>01</h4></div>
-            <div className="seat"><h4>01</h4></div>
-            <div className="seat"><h4>01</h4></div>
-            <div className="seat"><h4>01</h4></div>
-            <div className="seat"><h4>01</h4></div>
-            <div className="seat"><h4>01</h4></div>
+
+          { assentos.map((assento, index) =>
+                <Seat
+                key={index} 
+                seat={assento.id}
+                name={assento.name}
+                available={assento.isAvailable}
+                setArr={setArr}
+                arr={arr}
+                /> 
+            )}
+            
         </div>
 
         <div className="subtitles">
@@ -34,24 +87,27 @@ export default function Seats(){
             </div> 
         </div>
 
+
         <div className="dados">
             <div className="identidade">
                 <h4>Nome do comprador:</h4>
-                <input placeholder="Digite seu nome" />
+                <input placeholder="Digite seu nome" type="text" name={nome} onChange= {e => setNome(e.target.value)} />
             </div>
             <div className="cpf">
                 <h4>CPF do comprador:</h4>
-                <input placeholder="Digite seu CPF" />
+                <input placeholder="Digite seu CPF" type="text" name={cpf}  onChange= {e => setCpf(e.target.value)}/>
             </div>
         </div>
 
+       <Link to={'/sucesso'}> <button type="submit" className="reservar">Reservar assento(s)</button > </Link>
+        </form>
 
         <div className="footer">
             <div className="sessionchoosed">
-                <div className="img">foto</div>
+                <div className="img"><img src={footermovie.posterURL} /></div>
                 <div>
-                <h5>Enola Holmes</h5>
-                <h4>Quinta-feira - 15:00</h4>
+                <h5>{footermovie.title}</h5>
+                <h4>{footerday.weekday} - {footerhour.name}</h4>
                 </div>
             </div>
         </div>

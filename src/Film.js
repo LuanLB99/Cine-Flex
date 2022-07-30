@@ -8,7 +8,7 @@ export default function Film({setId}) {
 
   useEffect(() => {
     const promise = axios.get(
-      "https://mock-api.driven.com.br/api/v5/cineflex/movies"
+      "https://mock-api.driven.com.br/api/v7/cineflex/movies"
     );
     promise.then((resposta) => {
       setCartaz(resposta.data);
@@ -22,7 +22,7 @@ export default function Film({setId}) {
         <h1>Selecione o Filme</h1>
       </div>
     <div className="films">
-     {cartaz.map((value) => <Link to={`/sessoes/`+value.id}>
+     {cartaz.map((value) => <Link to={`/sessoes/${value.id}`}>
      <img src={value.posterURL} alt="filme" onClick={() => setId(value.id)}></img>
      </Link>
       )}
