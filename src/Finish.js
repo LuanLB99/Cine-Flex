@@ -1,8 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+
 
 
 export default function Finish({finish}){
-    console.log(finish);
+    const location = useLocation();
+    console.log(location.state?.batata, finish);
+    
     return(
         <>
          <div className="header">

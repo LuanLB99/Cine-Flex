@@ -27,9 +27,21 @@ export default function Seats({setFinish, finish}){
                 setFooterhour(resposta.data);
                 setFootermovie(resposta.data.movie);
                 setFooterday(resposta.data.day);
+                console.log(footermovie.title,footerday.weekday,footerday.date,nome,cpf)
             })
         }, []);
 
+        function mergeValues(){
+            
+            return {
+                filme:footermovie.title,
+                dia: footerday.weekday,
+                data: footerday.date,
+                vagas:arr,
+                nome: nome,
+                cpf: cpf
+            }
+        }
 
         function reserve(e){
             e.preventDefault();
@@ -38,18 +50,14 @@ export default function Seats({setFinish, finish}){
                 name:nome,
                 cpf:cpf
             }
-            setFinish(...finish, {
-                filme:footermovie.title,
-                dia: footerday.weekday,
-                data: footerday.date,
-                vagas:arr,
-                nome: nome,
-                cpf: cpf
-            })
+                console.log(footermovie.title,footerday.weekday,footerday.date,nome,cpf)
+
+            
+            
             const promise = axios.post('https://mock-api.driven.com.br/api/v7/cineflex/seats/book-many', body)
             promise.then();
         }
-
+        console.log()
     return(
         <>
 
@@ -99,7 +107,7 @@ export default function Seats({setFinish, finish}){
             </div>
         </div>
 
-       <Link to={'/sucesso'}> <button type="submit" className="reservar">Reservar assento(s)</button > </Link>
+      <Link state={mergeValues()}  to={"/sucesso"}  ><button type="submit" className="reservar">Reservar assento(s)</button ></Link>
         </form>
 
         <div className="footer">
