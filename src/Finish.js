@@ -4,27 +4,29 @@ import { Link, useLocation } from "react-router-dom";
 
 export default function Finish({finish}){
     const location = useLocation();
-    console.log(location.state?.batata, finish);
-    
+    console.log(location.state, finish); 
+    let list = location.state.vagas;
+
+
     return(
         <>
          <div className="header">
-            <h1>Pedido Feito com sucesso!</h1>
+            <h1 className="done">Pedido Feito com sucesso!</h1>
         </div>
         <div className="content">
         <div className="finish">
             <div className="title">Filme e sessao</div>
             <div className="subtitle">
-                <h4>Enola Holmes</h4>
-                <h4>Enola Holmes</h4>
+                <h4>{location.state.filme}</h4>
+                <h4>{location.state.data} - {location.state.hora}</h4>
             </div>
         </div>
 
         <div className="finish">
             <div className="title">Ingressos</div>
             <div className="subtitle">
-                <h4>Enola Holmes</h4>
-                <h4>Enola Holmes</h4>
+               { list.map((vaga) => <h4> Assento {vaga}</h4>)}
+                
             </div>
         </div>
 
@@ -32,8 +34,8 @@ export default function Finish({finish}){
         <div className="finish">
             <div className="title">Comprador</div>
             <div className="subtitle">
-                <h4>Enola Holmes</h4>
-                <h4>Enola Holmes</h4>
+                <h4>Nome: {location.state.nome}</h4>
+                <h4>CPF: {location.state.cpf}</h4>
             </div>
         </div>
 

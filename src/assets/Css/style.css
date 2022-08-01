@@ -25,8 +25,9 @@ a {
 }
 
 .header {
-  height: 45px;
+  height: 70px;
   font-family: "Roboto";
+  font-size: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -54,8 +55,12 @@ a {
   margin: 0 auto;
 }
 
+.horário h4 {
+  width: 90%;
+}
+
 .section {
-  max-height: 400px;
+  max-height: 600px;
   overflow-y: scroll;
 }
 
@@ -122,11 +127,12 @@ a {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin: 0px 10px;
 }
 
 .sub h4 {
   font-family: 'Roboto';
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .selecionado {
@@ -178,7 +184,25 @@ a {
 }
 
 .dados {
-  margin: 40px 0;
+  width:100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: 20px 0;
+  font-family: 'Roboto';
+}
+
+.dados input {
+  width: 80%;
+  border: 1px solid #D4D4D4 ;
+  height: 30px;
+  margin-bottom: 15px;
+  
+}
+
+.dados h4 {
+  width: 90%;
+
 }
 
 .reservar {
@@ -204,6 +228,13 @@ a {
 
 }
 
+.legenda {
+  width: 100%;
+  font-family: 'Roboto';
+  display: flex;
+  justify-content: center;
+}
+
 .subtitles {
   width: 80%;
   font-family: 'Roboto';
@@ -214,4 +245,16 @@ a {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+}
+
+form {
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.done {
+  color: #247A6B; 
 }

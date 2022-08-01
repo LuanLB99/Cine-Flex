@@ -6,20 +6,25 @@ export default function Seat({seat, name, available, setArr, arr}){
     const [div, setDiv] = useState(true);
     const [nameclass, setNameclass] = useState('disponivel');
 
+    function removeItem(newarr, value){
+        return newarr.filter((i) => i != value);
+    }
+
     function statusdiv(){
         if(div === true && status === true) {
+            if(!arr.includes(name)) {
                 arr.push(name);
+            }
                 setDiv(false);
                 setNameclass('selecionado');
-                setStatus(false);
            
         } else {
                 setDiv(true);
                 setNameclass('disponivel');
+                setArr(removeItem(arr, name));
         }
         
     }
-
 
 
 

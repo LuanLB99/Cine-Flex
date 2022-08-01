@@ -31,12 +31,15 @@ export default function Seats({setFinish, finish}){
             })
         }, []);
 
+    
+
         function mergeValues(){
             
             return {
                 filme:footermovie.title,
                 dia: footerday.weekday,
                 data: footerday.date,
+                hora:footerhour.name,
                 vagas:arr,
                 nome: nome,
                 cpf: cpf
@@ -50,17 +53,17 @@ export default function Seats({setFinish, finish}){
                 name:nome,
                 cpf:cpf
             }
-                console.log(footermovie.title,footerday.weekday,footerday.date,nome,cpf)
+
 
             
             
             const promise = axios.post('https://mock-api.driven.com.br/api/v7/cineflex/seats/book-many', body)
             promise.then();
         }
-        console.log()
+        console.log('deu certo!')
     return(
         <>
-
+        
         <form onSubmit={reserve} >
         <div className="header">
             <h1>Selecione o(s) assento(s)</h1>
@@ -80,7 +83,7 @@ export default function Seats({setFinish, finish}){
             
         </div>
 
-        <div className="subtitles">
+        <div className="legenda">
             <div className="sub">
                 <div className="selecionado"></div>
                 <h4>Selecionado</h4>
