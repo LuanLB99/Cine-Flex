@@ -10,7 +10,6 @@ import Finish from "./Finish";
 
 export default function App(){
   const [id, setId] = useState('');
-  const [finish,setFinish] = useState({});
     return(
     <div className="App">
       <Top />
@@ -18,8 +17,8 @@ export default function App(){
       <Routes>
         <Route path='/' element={<Film setId={setId}/>} />
         <Route path={`/sessoes/:idFilme`}  element={<Sessions id={id}/>} />
-        <Route path={`/assentos/:idSessao`} element={<Seats setFinish={setFinish} finish={finish}/>} />
-        <Route path={`/sucesso`} element={<Finish finish={finish}/>} />
+        <Route path={`/assentos/:idSessao`} element={<Seats />} />
+        <Route path={`/sucesso`} element={<Finish />} />
       </Routes>
       </BrowserRouter>
     </div>

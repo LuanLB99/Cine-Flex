@@ -2,9 +2,8 @@ import { Link, useLocation } from "react-router-dom";
 
 
 
-export default function Finish({finish}){
+export default function Finish(){
     const location = useLocation();
-    console.log(location.state, finish); 
     let list = location.state.vagas;
 
 

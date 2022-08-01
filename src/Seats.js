@@ -1,12 +1,12 @@
 import axios from "axios";
 import Seat from "./Seat";
 import { useState, useEffect } from "react";
-import { useParams, Navigate, Link, useNavigate } from "react-router-dom";
-import Finish from "./Finish";
+import { useParams, Link } from "react-router-dom";
 
 
 
-export default function Seats({setFinish, finish}){
+
+export default function Seats(){
         
         const {idSessao} = useParams({});
         const [assentos,setAssentos] = useState([]);
@@ -17,7 +17,6 @@ export default function Seats({setFinish, finish}){
         const [nome, setNome] = useState('');
         const [cpf, setCpf] = useState('');
         const [arr, setArr] = useState([]);
-        const navigate = useNavigate();
 
         useEffect(() => {
             const promise = axios.get(`https://mock-api.driven.com.br/api/v7/cineflex/showtimes/${idSessao}/seats`);
@@ -27,7 +26,6 @@ export default function Seats({setFinish, finish}){
                 setFooterhour(resposta.data);
                 setFootermovie(resposta.data.movie);
                 setFooterday(resposta.data.day);
-                console.log(footermovie.title,footerday.weekday,footerday.date,nome,cpf)
             })
         }, []);
 
@@ -60,7 +58,7 @@ export default function Seats({setFinish, finish}){
             const promise = axios.post('https://mock-api.driven.com.br/api/v7/cineflex/seats/book-many', body)
             promise.then();
         }
-        console.log('deu certo!')
+
     return(
         <>
         
@@ -102,11 +100,11 @@ export default function Seats({setFinish, finish}){
         <div className="dados">
             <div className="identidade">
                 <h4>Nome do comprador:</h4>
-                <input placeholder="Digite seu nome" type="text" name={nome} onChange= {e => setNome(e.target.value)} />
+                <input placeholder="Digite seu nome" type="text" name={nome} onChange= {e => setNome(e.target.value)} required/>
             </div>
             <div className="cpf">
                 <h4>CPF do comprador:</h4>
-                <input placeholder="Digite seu CPF" type="text" name={cpf}  onChange= {e => setCpf(e.target.value)}/>
+                <input placeholder="Digite seu CPF" type="text" name={cpf}  onChange= {e => setCpf(e.target.value)} required/>
             </div>
         </div>
 
